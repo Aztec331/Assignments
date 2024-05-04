@@ -70,20 +70,19 @@ def create_service(request):
         all_Categories= Category.objects.all()
         context={"categories":all_Categories}
         return render(request,"gas_utility/create_service.html",context)
-    else:
+    elif request.method=="POST" and request.FILES.get('file'):
         #This is the post method
 
         #Get the data from the form
         category= request.POST.get('category')
         details= request.POST.get('details')
-        file= request.FILES.get('file')
+        file= request.FILES['file']
         user= request.user
 
         #get the specific category name from the form, store it in categoryName field of
         #Category model , save this data into  category_data variable and save this variable
         #as category=category_data. 
         category_data= Category.objects.get(categoryName=category)
-
 
         new_service= Service(
             category= category_data,
@@ -93,7 +92,6 @@ def create_service(request):
         )
 
         new_service.save()
-        # file_path= new_service.file.path
 
         return HttpResponseRedirect(reverse('index'))
 

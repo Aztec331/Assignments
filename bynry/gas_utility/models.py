@@ -15,7 +15,7 @@ class Service(models.Model):
     category=models.ForeignKey(Category, on_delete=models.CASCADE,null=True, blank=True ,related_name="services")
     details=models.CharField(max_length=300, null=False, blank=False, default="")
     file = models.FileField(upload_to='create_service',null=True, blank=True)
-    file = models.FileField(upload_to='create_service',null=True, blank=True)
+    # file = models.FileField(upload_to='create_service',null=True, blank=True)
     user=models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
 
     def __str__(self):
