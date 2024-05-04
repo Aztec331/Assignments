@@ -1,0 +1,86 @@
+{% extends "gas_utility/layout.html" %}
+
+{% block body %}
+    <div class="container">
+    <h2>Service request</h2>
+    </div>
+
+    <div class="container">
+    <form action="{% url 'create_service' %}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        
+        <div class="form-group">
+            <label for="category">Type of service</label>
+            <!-- NAME== "category" -->
+            <select name="category" id="category" class="form-control">
+                {% for category in categories %}
+                <option value="{{category}}">{{category}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="details">Request Details</label>
+            <!-- NAME=="details" -->
+            <textarea name="details" id="details" cols="30" rows="10" class="form-control" placeholder="Description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="imageURL">File(optional)</label>
+            <!-- NAME="file" -->
+            <input type="file" name="file" id="imageURL" >
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+        </div>
+
+        
+    </form>
+    </div>
+    
+    <div style="display:flex;justify-content:center;align-items:center;margin-top: 100px;">
+        <p style="font-size: 50px;">Upload Your File Here..</p>
+    </div>
+    {% if audio_path%}
+        <div style="display:flex;justify-content:center;align-items:center;margin-top: 10px;">
+            <a href="{{audio_path}}">{{audio_path}}</a>
+        </div>
+    {%endif%}
+    <div id="fileform" style="display:flex;justify-content:center;align-items:center;margin-top: 10px;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="audio"><strong>Upload Audio: </strong></label>
+            <input type="file" name="audio" accept="audio/*"><br><br>
+            <label for="image"><strong>Upload Image: </strong></label>
+            <input type="file" name="image" accept="image/jpeg"><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
