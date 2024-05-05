@@ -19,4 +19,4 @@ class Service(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="user")
 
     def __str__(self):
-        return self.category
+        return str(self.category)
